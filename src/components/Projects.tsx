@@ -40,7 +40,7 @@ const Projects = () => {
           {projects.map((project, index) => (
             <div 
               key={index}
-              className="glass-card p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 group relative overflow-hidden"
+              className="glass-card p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-2 hover:scale-105 group relative overflow-hidden"
             >
               <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
               

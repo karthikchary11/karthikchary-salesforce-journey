@@ -29,7 +29,10 @@ const Navbar = () => {
     { id: "skills", label: "Skills" },
     { id: "experience", label: "Experience" },
     { id: "projects", label: "Projects" },
+    { id: "use-cases", label: "Use Cases" },
     { id: "achievements", label: "Trailhead" },
+    { id: "certifications", label: "Certifications" },
+    { id: "testimonials", label: "Testimonials" },
     { id: "contact", label: "Contact" },
   ];
 
@@ -75,6 +78,14 @@ const Navbar = () => {
             >
               <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
               <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+            </Button>
+
+            <Button
+              size="sm"
+              className="hidden md:inline-flex bg-primary-foreground text-primary hover:bg-primary-foreground/90"
+              onClick={() => window.open('#download', '_self')}
+            >
+              Download Resume
             </Button>
 
             <Button

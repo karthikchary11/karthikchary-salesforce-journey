@@ -1,15 +1,17 @@
+// src/components/Navbar.tsx - UPDATED: Resume Download Link
+
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Moon, Sun, Menu, X } from "lucide-react";
 import { useTheme } from "next-themes";
 import useScrollSpy from "@/hooks/use-scroll-spy";
 
-// Updated navLinks for the new logical order
+// Updated navLinks for the new logical order (Validation consolidated section)
 const navLinks = [
   { id: "about", label: "About" },
   { id: "education", label: "Education" },
   { id: "skills", label: "Skills" },
-  { id: "certifications", label: "Validation" },
+  { id: "certifications", label: "Validation" }, 
   { id: "experience", label: "Experience" },
   { id: "projects", label: "Projects" },
   { id: "use-cases", label: "Use Cases" },
@@ -43,14 +45,14 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { theme, setTheme } = useTheme();
 
-  // NEW: Determine the currently active section using the scroll spy hook
-  const activeSection = useScrollSpy(navLinks.map(link => link.id));
+  // Determine the currently active section using the scroll spy hook
+  const activeSection = useScrollSpy(navLinks.map(link => link.id)); 
 
   useEffect(() => {
     // Named function for scroll handling with throttling
     const handleScroll = throttle(() => {
       setIsScrolled(window.scrollY > 20);
-    }, 100); // Throttle to 100ms for performance
+    }, 100);
 
     window.addEventListener("scroll", handleScroll);
     
@@ -64,8 +66,8 @@ const Navbar = () => {
   const handleNavClick = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      // Offset by 64px (h-16 navbar height) for smooth scroll to prevent header covering content
-      const topOffset = element.offsetTop - 64;
+      // Offset by 64px (h-16 navbar height) for smooth scroll
+      const topOffset = element.offsetTop - 64; 
       window.scrollTo({ top: topOffset, behavior: "smooth" });
       setIsMobileMenuOpen(false);
     }
@@ -86,10 +88,12 @@ const Navbar = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  // Named function for resume download
+  // --- RESUME DOWNLOAD FUNCTION UPDATED ---
   const handleResumeDownload = () => {
-    window.open('#download', '_self');
+    const resumeUrl = 'https://drive.google.com/file/d/137hnVU5NarB_6lnTVVgY9suoKylUvE6B/view?usp=sharing';
+    window.open(resumeUrl, '_blank'); // Open link in a new tab
   };
+  // ----------------------------------------
 
   return (
     <nav
@@ -172,13 +176,15 @@ const DesktopNav = ({ navLinks, onNavClick, activeSection }: NavProps) => (
       <button
         key={link.id}
         onClick={() => onNavClick(link.id)}
+        // Dynamic class based on activeSection prop
         className={`px-4 py-2 font-medium relative group transition-colors 
           ${activeSection === link.id 
             ? 'text-primary-foreground' 
             : 'text-primary-foreground/70 hover:text-primary-foreground'}`}
-        aria-label={`Navigate to ${link.label} section`}
+        aria-label={`Maps to ${link.label} section`}
       >
         {link.label}
+        {/* Active state indicator: full width if active, or on hover */}
         <span 
           className={`absolute bottom-0 left-0 h-0.5 bg-primary-foreground transition-all duration-300 ${
             activeSection === link.id ? 'w-full' : 'w-0 group-hover:w-full'
@@ -205,7 +211,7 @@ const MobileNav = ({ isOpen, navLinks, onNavClick }: MobileNavProps) => {
             key={link.id}
             onClick={() => onNavClick(link.id)}
             className="px-4 py-3 text-primary-foreground/90 hover:text-primary-foreground hover:bg-primary-foreground/10 rounded-lg text-left transition-all"
-            aria-label={`Navigate to ${link.label} section`}
+            aria-label={`Maps to ${link.label} section`}
           >
             {link.label}
           </button>

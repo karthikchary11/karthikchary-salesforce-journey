@@ -1,5 +1,8 @@
 import { Badge } from "@/components/ui/badge";
 import { ArrowUpRight } from "lucide-react";
+import { Button } from "@/components/ui/button"; // Added Button
+
+const PROJECTS_DRIVE_URL = "https://drive.google.com/drive/folders/1KNw-2fhm2O06_JfIM5YaNRqGdCfsXjdV?usp=drive_link";
 
 const Projects = () => {
   const projects = [
@@ -49,7 +52,16 @@ const Projects = () => {
                   <h3 className="text-xl font-bold group-hover:text-primary transition-colors">
                     {project.name}
                   </h3>
-                  <ArrowUpRight className="h-5 w-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
+                  {/* Replaced icon with Button link */}
+                  <Button
+                    variant="ghost" 
+                    size="icon"
+                    className="h-8 w-8 p-0 text-muted-foreground group-hover:text-primary"
+                    onClick={() => window.open(PROJECTS_DRIVE_URL, '_blank')}
+                    aria-label={`View documentation for ${project.name}`}
+                  >
+                    <ArrowUpRight className="h-5 w-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
+                  </Button>
                 </div>
                 
                 <p className="text-muted-foreground mb-4 leading-relaxed">

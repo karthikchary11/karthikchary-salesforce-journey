@@ -1,7 +1,8 @@
-import { Trophy, Award, Users, FileText } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Award, Star, Trophy, Users, FileText } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
-const Achievements = () => {
+const Certifications = () => {
   const [counters, setCounters] = useState({
     points: 0,
     badges: 0,
@@ -16,7 +17,7 @@ const Achievements = () => {
         if (entries[0].isIntersecting && !hasAnimated) {
           setHasAnimated(true);
           
-          // Animate points counter
+          // Animate points counter (Target: 77,000)
           let pointsCount = 0;
           const pointsInterval = setInterval(() => {
             pointsCount += 1000;
@@ -28,7 +29,7 @@ const Achievements = () => {
             }
           }, 20);
 
-          // Animate badges counter
+          // Animate badges counter (Target: 50)
           let badgesCount = 0;
           const badgesInterval = setInterval(() => {
             badgesCount += 1;
@@ -40,7 +41,7 @@ const Achievements = () => {
             }
           }, 30);
 
-          // Animate superbadges counter
+          // Animate superbadges counter (Target: 6)
           let superbadgesCount = 0;
           const superbadgesInterval = setInterval(() => {
             superbadgesCount += 1;
@@ -63,7 +64,16 @@ const Achievements = () => {
     return () => observer.disconnect();
   }, [hasAnimated]);
 
-  const achievements = [
+  const certifications = [
+    { title: "Apex Specialist", type: "Superbadge" },
+    { title: "Flow Administration", type: "Superbadge" },
+    { title: "Flow Elements & Resources", type: "Superbadge" },
+    { title: "Flow Orchestration", type: "Superbadge" },
+    { title: "Process Automation", type: "Superbadge" },
+    { title: "Flow Fundamentals", type: "Superbadge" }
+  ];
+  
+  const otherAchievements = [
     {
       icon: Users,
       text: "Selected among Top 60 students for NTT DATA COE Salesforce Program"
@@ -79,13 +89,18 @@ const Achievements = () => {
   ];
 
   return (
-    <section id="achievements" className="py-20 px-4" ref={sectionRef}>
+    <section id="certifications" className="py-20 px-4" ref={sectionRef}>
       <div className="container mx-auto max-w-6xl">
-        <h2 className="text-4xl font-bold mb-12 text-center">
-          Trailhead & <span className="gradient-text">Achievements</span>
-        </h2>
-
-        {/* Animated Stats Grid */}
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-bold mb-4">
+            Salesforce <span className="gradient-text">Validation</span>
+          </h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            Consolidated achievements from Trailhead and formal certifications
+          </p>
+        </div>
+        
+        {/* Animated Stats Grid (Trailhead) */}
         <div className="grid md:grid-cols-3 gap-6 mb-12">
           <div className="glass-card p-8 text-center hover:shadow-xl transition-all duration-300 hover:scale-105">
             <div className="inline-flex p-4 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 mb-4">
@@ -118,9 +133,36 @@ const Achievements = () => {
           </div>
         </div>
 
-        {/* Achievement Cards */}
-        <div className="space-y-4">
-          {achievements.map((achievement, index) => {
+        {/* Superbadges Grid */}
+        <h3 className="text-3xl font-semibold mb-6 text-center">Superbadges Achieved</h3>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {certifications.map((cert, index) => (
+            <div
+              key={index}
+              className="glass-card p-6 group hover:scale-105 transition-all duration-300 cursor-pointer"
+            >
+              <div className="flex items-start gap-4">
+                <div className="p-3 rounded-lg bg-gradient-to-br from-primary to-secondary">
+                  <Award className="h-6 w-6 text-primary-foreground" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-semibold text-lg mb-2 group-hover:text-primary transition-colors">
+                    {cert.title}
+                  </h3>
+                  <Badge variant="secondary" className="gap-1">
+                    <Star className="h-3 w-3 fill-primary text-primary" />
+                    {cert.type}
+                  </Badge>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        {/* Other Achievements */}
+        <h3 className="text-3xl font-semibold mt-12 mb-6 text-center">Notable Achievements</h3>
+        <div className="space-y-4 max-w-4xl mx-auto">
+          {otherAchievements.map((achievement, index) => {
             const Icon = achievement.icon;
             return (
               <div 
@@ -142,4 +184,4 @@ const Achievements = () => {
   );
 };
 
-export default Achievements;
+export default Certifications;

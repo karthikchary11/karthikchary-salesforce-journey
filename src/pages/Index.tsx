@@ -1,33 +1,43 @@
 import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import About from "@/components/About";
-import Skills from "@/components/Skills";
-import Experience from "@/components/Experience";
-import Projects from "@/components/Projects";
-import UseCases from "@/components/UseCases";
-import Achievements from "@/components/Achievements";
-import Certifications from "@/components/Certifications";
-import Testimonials from "@/components/Testimonials";
-import FutureGoals from "@/components/FutureGoals";
-import Education from "@/components/Education";
-import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+
+// All sections now imported from the new 'sections' directory
+import Hero from "@/sections/Hero";
+import About from "@/sections/About";
+import Education from "@/sections/Education";
+import Skills from "@/sections/Skills";
+import Certifications from "@/sections/Certifications";
+import Experience from "@/sections/Experience";
+import Projects from "@/sections/Projects";
+import UseCases from "@/sections/UseCases";
+import Testimonials from "@/sections/Testimonials";
+import FutureGoals from "@/sections/FutureGoals";
+import Contact from "@/sections/Contact";
 
 const Index = () => {
   return (
     <div className="min-h-screen">
       <Navbar />
       <Hero />
+      
+      {/* 1. Who Am I? (Introduction & Foundation) */}
       <About />
+      <Education />
+
+      {/* 2. Core Expertise & Validation */}
       <Skills />
+      <Certifications />
+      
+      {/* 3. Professional History & Work Showcase */}
       <Experience />
       <Projects />
       <UseCases />
-      <Achievements />
-      <Certifications />
+      
+      {/* 4. Social Proof & Future */}
       <Testimonials />
       <FutureGoals />
-      <Education />
+      
+      {/* 5. Action */}
       <Contact />
       <Footer />
     </div>

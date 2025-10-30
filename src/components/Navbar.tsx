@@ -2,16 +2,17 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Moon, Sun, Menu, X } from "lucide-react";
 import { useTheme } from "next-themes";
+import useScrollSpy from "@/hooks/use-scroll-spy";
 
-// Move navLinks outside component for better performance
+// Updated navLinks for the new logical order
 const navLinks = [
   { id: "about", label: "About" },
+  { id: "education", label: "Education" },
   { id: "skills", label: "Skills" },
+  { id: "certifications", label: "Validation" },
   { id: "experience", label: "Experience" },
   { id: "projects", label: "Projects" },
   { id: "use-cases", label: "Use Cases" },
-  { id: "achievements", label: "Trailhead" },
-  { id: "certifications", label: "Certifications" },
   { id: "testimonials", label: "Testimonials" },
   { id: "contact", label: "Contact" },
 ];
@@ -42,6 +43,9 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { theme, setTheme } = useTheme();
 
+  // NEW: Determine the currently active section using the scroll spy hook
+  const activeSection = useScrollSpy(navLinks.map(link => link.id));
+
   useEffect(() => {
     // Named function for scroll handling with throttling
     const handleScroll = throttle(() => {
@@ -60,7 +64,9 @@ const Navbar = () => {
   const handleNavClick = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      // Offset by 64px (h-16 navbar height) for smooth scroll to prevent header covering content
+      const topOffset = element.offsetTop - 64;
+      window.scrollTo({ top: topOffset, behavior: "smooth" });
       setIsMobileMenuOpen(false);
     }
   };
@@ -106,7 +112,7 @@ const Navbar = () => {
           </button>
 
           {/* Desktop Navigation */}
-          <DesktopNav navLinks={navLinks} onNavClick={handleNavClick} />
+          <DesktopNav navLinks={navLinks} onNavClick={handleNavClick} activeSection={activeSection} />
 
           {/* Theme Toggle & Mobile Menu */}
           <div className="flex items-center gap-2">
@@ -157,26 +163,34 @@ const Navbar = () => {
 interface NavProps {
   navLinks: Array<{ id: string; label: string }>;
   onNavClick: (id: string) => void;
+  activeSection: string;
 }
 
-const DesktopNav = ({ navLinks, onNavClick }: NavProps) => (
+const DesktopNav = ({ navLinks, onNavClick, activeSection }: NavProps) => (
   <div className="hidden md:flex items-center gap-1">
     {navLinks.map((link) => (
       <button
         key={link.id}
         onClick={() => onNavClick(link.id)}
-        className="px-4 py-2 text-primary-foreground/90 hover:text-primary-foreground font-medium relative group transition-colors"
+        className={`px-4 py-2 font-medium relative group transition-colors 
+          ${activeSection === link.id 
+            ? 'text-primary-foreground' 
+            : 'text-primary-foreground/70 hover:text-primary-foreground'}`}
         aria-label={`Navigate to ${link.label} section`}
       >
         {link.label}
-        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary-foreground group-hover:w-full transition-all duration-300" />
+        <span 
+          className={`absolute bottom-0 left-0 h-0.5 bg-primary-foreground transition-all duration-300 ${
+            activeSection === link.id ? 'w-full' : 'w-0 group-hover:w-full'
+          }`}
+        />
       </button>
     ))}
   </div>
 );
 
 // Separate component for Mobile Navigation
-interface MobileNavProps extends NavProps {
+interface MobileNavProps extends Pick<NavProps, 'navLinks' | 'onNavClick'> {
   isOpen: boolean;
 }
 

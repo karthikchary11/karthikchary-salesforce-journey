@@ -1,6 +1,9 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight, CheckCircle2, Link } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
+const PROJECTS_DRIVE_URL = "https://drive.google.com/drive/folders/1KNw-2fhm2O06_JfIM5YaNRqGdCfsXjdV?usp=drive_link";
 
 const UseCases = () => {
   const cases = [
@@ -69,6 +72,18 @@ const UseCases = () => {
                   </div>
                 </div>
               </CardContent>
+              {/* Added CardFooter with Link Button */}
+              <CardFooter>
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={() => window.open(PROJECTS_DRIVE_URL, '_blank')}
+                  className="w-full justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-colors"
+                >
+                  <Link className="h-4 w-4 mr-2" />
+                  View Documentation
+                </Button>
+              </CardFooter>
             </Card>
           ))}
         </div>

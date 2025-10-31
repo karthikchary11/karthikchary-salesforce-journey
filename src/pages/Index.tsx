@@ -2,7 +2,6 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 // All sections now imported from the new 'sections' directory
-import Achievements from "@/sections/Achievements";
 import Hero from "@/sections/Hero";
 import About from "@/sections/About";
 import Education from "@/sections/Education";
@@ -35,7 +34,6 @@ const Index = () => {
       <UseCases />
       
       {/* 4. Social Proof & Future */}
-      <Achievements />
       <Testimonials />
       <FutureGoals />
       

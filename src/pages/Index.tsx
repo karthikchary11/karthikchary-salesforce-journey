@@ -6,7 +6,8 @@ import Hero from "@/sections/Hero";
 import About from "@/sections/About";
 import Education from "@/sections/Education";
 import Skills from "@/sections/Skills";
-import Certifications from "@/sections/Certifications";
+// import Certifications from "@/sections/Certifications"; // <-- This is now replaced
+import Achievements from "@/sections/Achievements"; // <-- This is the new consolidated section
 import Experience from "@/sections/Experience";
 import Projects from "@/sections/Projects";
 import UseCases from "@/sections/UseCases";
@@ -26,7 +27,8 @@ const Index = () => {
 
       {/* 2. Core Expertise & Validation */}
       <Skills />
-      <Certifications />
+      {/* <Certifications /> */} {/* <-- Replaced this... */}
+      <Achievements /> {/* <-- ...with your new section */}
       
       {/* 3. Professional History & Work Showcase */}
       <Experience />

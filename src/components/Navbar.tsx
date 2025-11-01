@@ -1,4 +1,4 @@
-// src/components/Navbar.tsx - UPDATED: Resume Download Link
+// src/components/Navbar.tsx - FIXED LINT ERRORS
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
@@ -20,12 +20,13 @@ const navLinks = [
   { id: "contact", label: "Contact" },
 ];
 
-// Throttle utility for performance optimization
-const throttle = (func: Function, delay: number) => {
+// --- THROTTLE FUNCTION (FIXED) ---
+// Replaced 'any' with 'unknown' to satisfy the 'no-explicit-any' ESLint rule.
+const throttle = <F extends (...args: unknown[]) => unknown>(func: F, delay: number) => {
   let timeoutId: NodeJS.Timeout | null = null;
   let lastExecTime = 0;
   
-  return (...args: any[]) => {
+  return (...args: Parameters<F>) => {
     const currentTime = Date.now();
     
     if (currentTime - lastExecTime > delay) {
@@ -40,6 +41,7 @@ const throttle = (func: Function, delay: number) => {
     }
   };
 };
+// ---------------------------------
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);

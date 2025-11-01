@@ -2,12 +2,13 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 // All sections now imported from the new 'sections' directory
-import Achievements from "@/sections/Achievements"; // <-- ADDED
 import Hero from "@/sections/Hero";
 import About from "@/sections/About";
 import Education from "@/sections/Education";
 import Skills from "@/sections/Skills";
-import Certifications from "@/sections/Certifications";
+// import Certifications from "@/sections/Certifications"; // <-- REMOVED
+import Achievements from "@/sections/Achievements"; // <-- ADDED
+import TrailheadStats from "@/sections/TrailheadStats";
 import Experience from "@/sections/Experience";
 import Projects from "@/sections/Projects";
 import UseCases from "@/sections/UseCases";
@@ -27,7 +28,9 @@ const Index = () => {
 
       {/* 2. Core Expertise & Validation */}
       <Skills />
-      <Certifications />
+      {/* <Certifications /> */} {/* <-- Replaced this... */}
+      <Achievements /> {/* <-- ...with the new section */}
+      <TrailheadStats />
       
       {/* 3. Professional History & Work Showcase */}
       <Experience />
@@ -35,7 +38,6 @@ const Index = () => {
       <UseCases />
       
       {/* 4. Social Proof & Future */}
-      <Achievements /> {/* <-- ADDED */}
       <Testimonials />
       <FutureGoals />
       
